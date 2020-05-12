@@ -1,9 +1,0 @@
-name: example-svc-21
-image: "python-sample:latest"
-inputMapping:
-  baseCmd: python /usr/test_script.py
-outputMapping:
-  outputDir: /tmp
-  outputFileName: new_purchases.csv
-
-

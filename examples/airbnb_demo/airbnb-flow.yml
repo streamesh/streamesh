@@ -2,12 +2,8 @@ type: flow
 name: airbnb-ny-properties
 
 input:
-  - name: manhattan-bucket
   - name: manhattan-file
-  - name: others-bucket
   - name: others-file
-  - name: accessKey
-  - name: secretKey
 
 
 output:
@@ -24,36 +20,22 @@ pipes:
       - target: ${data}
         as: brooklyn-properties
 
-  - type: s3-downloader
-    as: s3-manhattan
+  - type: file-retriever
+    as: file-manhattan
     input:
-      - target: ${bucket}
-        value: ${flow.input.manhattan-bucket}
-#        value: ic-demo-streamesh
       - target: ${filename}
         value: ${flow.input.manhattan-file}
-#        value: data/AB_NYC_2019_Manhattan.csv
-      - target: ${accessKey}
-        value: ${flow.input.accessKey}
-      - target: ${secretKey}
-        value: ${flow.input.secretKey}
+#        value: AB_NYC_2019_Manhattan.txt
     output:
       - target: ${output}
         as: manhattan-properties
 
-  - type: s3-downloader
-    as: s3-others
+  - type: file-retriever
+    as: file-others
     input:
-      - target: ${bucket}
-        value: ${flow.input.others-bucket}
-#        value: ic-demo-streamesh
       - target: ${filename}
         value: ${flow.input.others-file}
-#        value: data/AB_NYC_2019_rest.csv
-      - target: ${accessKey}
-        value: ${flow.input.accessKey}
-      - target: ${secretKey}
-        value: ${flow.input.secretKey}
+#        value: AB_NYC_2019_rest.txt
     output:
       - target: ${output}
         as: other-properties
@@ -64,7 +46,7 @@ pipes:
       - target: ${urls}
         value: ${db-reader.output.brooklyn-properties}
       - target: ${urls}
-        value: ${s3-manhattan.output.manhattan-properties}
+        value: ${file-manhattan.output.manhattan-properties}
     output:
       - target: ${output}
         as: brooklyn-and-manhattan
@@ -84,7 +66,7 @@ pipes:
       - target: ${urls}
         value: ${b-and-m-merger.output.brooklyn-and-manhattan}
       - target: ${urls}
-        value: ${s3-others.output.other-properties}
+        value: ${file-others.output.other-properties}
     output:
       - target: ${output}
         as: all-properties
@@ -97,5 +79,3 @@ pipes:
     output:
       - target: ${plot}
         as: full-plot
-
-

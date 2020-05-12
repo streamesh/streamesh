@@ -9,3 +9,5 @@ test_copy.txt
 **/*.settings
 **/*.factorypath
 **/*.log
+# Ignore Mac system files
+.DS_store

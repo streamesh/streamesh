@@ -1,0 +1,12 @@
+type: micropipe
+name: file-retriever
+image: "file-retriever:latest"
+inputMapping:
+  baseCmd: python3 /usr/file_retriever.py
+  parameters:
+    - name: filename
+      internalName: --file
+outputMapping:
+  - outputDir: /tmp
+    fileNamePattern: data.csv
+    name: output
