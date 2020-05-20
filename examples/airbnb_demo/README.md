@@ -1,9 +1,11 @@
 Airbnb demo
 ===========
 
+![alt text](img/diagram_for_data_pipeline.png "AirBnB pipeline")
+
 This demo uses four components:
 - simple-db-reader
-- s3-downloader
+- file-retriever
 - http-data-merger
 - python-plotter
 
@@ -30,7 +32,7 @@ To run the demo, we need to build the docker images for the remaining components
 Hereafter the commands to build the components:
 
 ```bash
-docker build --target s3-downloader -t s3-downloader .
+docker build --target file_retriever -t file_retriever .
 docker build --target http-data-merger -t http-data-merger .
 docker build --target python-plotter -t python-plotter .
 ```
@@ -38,7 +40,7 @@ docker build --target python-plotter -t python-plotter .
 
 You can now head to the Streamesh UI and upload the four components:
 - examples/simple-db-reader/simple-db-reader.yml
-- examples/s3-downloader/s3-downloader.yml
+- examples/file-retriever/file-retriever.yml
 - examples/http-data-merger/http-data-merger.yml
 - examples/python-plotter/python-plotter.yml
 
@@ -46,9 +48,7 @@ Finally, upload the flow definition:
 - examples/airbnb-flow.yml
 
 From the services list, press `Run` on the flow item and provide the following inputs:
-- manhattan-bucket -> ic-demo-streamesh 
-- manhattan-file -> data/AB_NYC_2019_Manhattan.csv
-- others-bucket -> ic-demo-streamesh
-- others-file -> data/AB_NYC_2019_rest.csv
+- manhattan-file -> AB_NYC_2019_Manhattan.txt
+- others-file -> AB_NYC_2019_rest.txt
 
 You can see a video of this demo running [here](https://www.youtube.com/watch?v=nlu9xmIURKU)
