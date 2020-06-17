@@ -29,7 +29,7 @@ WORKDIR /
 COPY python-plotter/plot_1.py ./usr/
 RUN pip3 install matplotlib seaborn
 
-FROM amancevice/pandas:0.25.3 as file_retriever
+FROM amancevice/pandas:0.25.3 as file-retriever
 WORKDIR /
 COPY file_retriever/file_retriever.py ./usr/
 RUN mkdir ./data
