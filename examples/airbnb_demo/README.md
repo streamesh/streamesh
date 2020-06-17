@@ -32,7 +32,7 @@ To run the demo, we need to build the docker images for the remaining components
 Hereafter the commands to build the components:
 
 ```bash
-docker build --target file_retriever -t file_retriever .
+docker build --target file_retriever -t file-retriever .
 docker build --target http-data-merger -t http-data-merger .
 docker build --target python-plotter -t python-plotter .
 ```
